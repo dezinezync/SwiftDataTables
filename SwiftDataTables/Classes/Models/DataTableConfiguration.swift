@@ -9,52 +9,6 @@
 import Foundation
 import UIKit
 
-public enum DataStyles {
-    
-    public enum Colors {
-        
-        public static var highlightedFirstColor: UIColor = {
-            return setupColor(normalColor: UIColor(red: 0.941, green: 0.941, blue: 0.941, alpha: 1),
-                              darkColor: UIColor(red: 0.16, green: 0.16, blue: 0.16, alpha: 1),
-                              defaultColor: UIColor(red: 0.941, green: 0.941, blue: 0.941, alpha: 1))
-        }()
-        
-        public static var highlightedSecondColor: UIColor = {
-            return setupColor(normalColor: UIColor(red: 0.9725, green: 0.9725, blue: 0.9725, alpha: 1),
-                              darkColor: UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1),
-                              defaultColor: UIColor(red: 0.9725, green: 0.9725, blue: 0.9725, alpha: 1))
-        }()
-        
-        public static var unhighlightedFirstColor: UIColor = {
-            return setupColor(normalColor: UIColor(red: 0.9725, green: 0.9725, blue: 0.9725, alpha: 1),
-                              darkColor: UIColor(red: 0.06, green: 0.06, blue: 0.06, alpha: 1),
-                              defaultColor: UIColor(red: 0.9725, green: 0.9725, blue: 0.9725, alpha: 1))
-        }()
-        
-        public static var unhighlightedSecondColor: UIColor = {
-            return setupColor(normalColor: .white,
-                              darkColor: UIColor(red: 0.03, green: 0.03, blue: 0.03, alpha: 1),
-                              defaultColor: .white)
-        }()
-    }
-}
-
-public let Style = DataStyles.self
-
-private func setupColor(normalColor: UIColor, darkColor: UIColor, defaultColor: UIColor) -> UIColor {
-    if #available(iOS 13, *) {
-        return UIColor.init { (trait) -> UIColor in
-            if trait.userInterfaceStyle == .dark {
-                return darkColor
-            } else {
-                return normalColor
-            }
-        }
-    } else {
-        return defaultColor
-    }
-}
-
 public struct DataTableColumnOrder: Equatable {
     //MARK: - Properties
     let index: Int
@@ -86,12 +40,12 @@ public struct DataTableConfiguration: Equatable {
     public var shouldSupportRightToLeftInterfaceDirection: Bool = true
     
     public var highlightedAlternatingRowColors = [
-        DataStyles.Colors.highlightedFirstColor,
-        DataStyles.Colors.highlightedSecondColor
+        UIColor(red: 0.941, green: 0.941, blue: 0.941, alpha: 1),
+        UIColor(red: 0.9725, green: 0.9725, blue: 0.9725, alpha: 1)
     ]
     public var unhighlightedAlternatingRowColors = [
-        DataStyles.Colors.unhighlightedFirstColor,
-        DataStyles.Colors.unhighlightedSecondColor
+        UIColor(red: 0.9725, green: 0.9725, blue: 0.9725, alpha: 1),
+        .white
     ]
     
     public var fixedColumns: DataTableFixedColumnType? = nil
