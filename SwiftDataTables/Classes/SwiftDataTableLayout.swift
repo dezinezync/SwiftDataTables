@@ -176,12 +176,14 @@ class SwiftDataTableLayout: UICollectionViewFlowLayout {
     }
     
     override var flipsHorizontallyInOppositeLayoutDirection: Bool {
-
-        if #available(iOSApplicationExtension 10.0, *) {
-            return dataTable.shouldSupportRightToLeftInterfaceDirection() ? collectionView!.traitCollection.layoutDirection == .rightToLeft : false
-        } else {
+        
+        guard let aClass = NSClassFromString("UIApplication") else {
             return false
         }
+        
+        let layoutDirection = UIUserInterfaceLayoutDirection(rawValue: aClass.value(forKeyPath: "sharedApplication.userInterfaceLayoutDirection") as! Int)
+        
+        return dataTable.shouldSupportRightToLeftInterfaceDirection() ? layoutDirection == .rightToLeft : false
 
     }
 }
